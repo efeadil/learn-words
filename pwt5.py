@@ -66,6 +66,19 @@ class QuizDialog(QDialog):
 
         # Ana pencereyi tekrar göster
         self.main_app.show()
+        def closeEvent(self, event):
+        cevap = QMessageBox.question(
+            self,
+            "Çıkmak istiyor musun?",
+            "Quizden çıkmak istiyor musun?",
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No,
+        )
+
+        if cevap == QMessageBox.Yes:
+            QApplication.quit()  # Uygulamayı tamamen kapatır
+        else:
+            event.ignore()  # Pencereyi kapatma
 
 
 class MainApp(QWidget):
