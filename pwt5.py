@@ -104,10 +104,10 @@ class MainApp(QWidget):
         self.baslangic_satir_edit = QLineEdit(self)
         self.bitis_satir_edit = QLineEdit(self)
 
-        layout.addWidget(QLabel("Başlangıç Satırı:"))
+        layout.addWidget(QLabel("Start Row:"))
         layout.addWidget(self.baslangic_satir_edit)
 
-        layout.addWidget(QLabel("Bitiş Satırı:"))
+        layout.addWidget(QLabel("end row:"))
         layout.addWidget(self.bitis_satir_edit)
 
         button_basla = QPushButton("Başla", self)
