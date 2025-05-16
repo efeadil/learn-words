@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt
 import pandas as pd
 import sys
+import os
 
 
 class QuizDialog(QDialog):
@@ -99,7 +100,7 @@ class MainApp(QWidget):
         baslangic_satir = int(self.baslangic_satir_edit.text())
         bitis_satir = int(self.bitis_satir_edit.text())
 
-        exel = "C:\\Users\\Adil\\Desktop\\ing kelime\\abc.xlsx"
+        exel = os.path.join(os.path.dirname(__file__), "abc.xlsx")
 
         self.veri = pd.read_excel(
             exel, skiprows=baslangic_satir - 1, nrows=bitis_satir - baslangic_satir + 1
