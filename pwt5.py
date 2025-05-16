@@ -49,7 +49,7 @@ class QuizDialog(QDialog):
         self.setLayout(layout)
         self.setWindowTitle("Quiz Penceresi")
 
-   def gonder_clicked(self):
+    def gonder_clicked(self):
         kullanici_cevap = self.cevap_kutusu.text().strip().lower()
         dogru_cevap = self.cevap2.strip().lower()
 
