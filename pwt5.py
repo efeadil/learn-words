@@ -12,6 +12,8 @@ from PyQt5.QtCore import Qt
 import pandas as pd
 import sys
 import os
+from PyQt5.QtMultimedia import QSound
+import os
 
 
 class QuizDialog(QDialog):
@@ -47,25 +49,30 @@ class QuizDialog(QDialog):
         self.setLayout(layout)
         self.setWindowTitle("Quiz Penceresi")
 
-    def gonder_clicked(self):
+   def gonder_clicked(self):
         kullanici_cevap = self.cevap_kutusu.text().strip().lower()
         dogru_cevap = self.cevap2.strip().lower()
 
         if kullanici_cevap == dogru_cevap:
+            # ✅ DOĞRU SESİ
+            sound_path = os.path.join(os.getcwd(), "correct_sound.wav")
+            QSound.play(sound_path)
+
             QMessageBox.information(self, "Doğru", "Doğru cevap!", QMessageBox.Ok)
-            self.main_app.dogrular.append(self.soru)  # Doğru bilinenler listesine ekle
+            self.main_app.dogrular.append(self.soru)
         else:
+            # ❌ YANLIŞ SESİ
+            sound_path = os.path.join(os.getcwd(), "incorrect_sound.wav")
+            QSound.play(sound_path)
+
             QMessageBox.warning(
                 self, "Yanlış", f"Yanlış. Doğru cevap: {dogru_cevap}", QMessageBox.Ok
             )
-            self.main_app.yanlislar.append(
-                self.soru
-            )  # Yanlış bilinenler listesine ekle
+            self.main_app.yanlislar.append(self.soru)
 
         self.accept()
-
-        # Ana pencereyi tekrar göster
         self.main_app.show()
+
         
     def closeEvent(self, event):
         cevap = QMessageBox.question(
