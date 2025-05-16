@@ -55,14 +55,14 @@ class QuizDialog(QDialog):
 
         if kullanici_cevap == dogru_cevap:
             # ✅ DOĞRU SESİ
-            sound_path = os.path.join(os.getcwd(), "correct_sound")
+            sound_path = os.path.join(os.getcwd(), "correct_sound.wav")
             QSound.play(sound_path)
 
             QMessageBox.information(self, "Doğru", "Doğru cevap!", QMessageBox.Ok)
             self.main_app.dogrular.append(self.soru)
         else:
             # ❌ YANLIŞ SESİ
-            sound_path = os.path.join(os.getcwd(), "incorrect_sound")
+            sound_path = os.path.join(os.getcwd(), "incorrect_sound.wav")
             QSound.play(sound_path)
 
             QMessageBox.warning(
