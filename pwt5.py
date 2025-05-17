@@ -36,8 +36,7 @@ class QuizDialog(QDialog):
         label_cevap1 = QLabel(self.cevap1)
         layout.addWidget(label_cevap1)
 
-        # label_cevap2 = QLabel(self.cevap2)
-        #  layout.addWidget(label_cevap2)
+        
 
         self.cevap_kutusu = QLineEdit(self)
         layout.addWidget(self.cevap_kutusu)
@@ -54,14 +53,14 @@ class QuizDialog(QDialog):
         dogru_cevap = self.cevap2.strip().lower()
 
         if kullanici_cevap == dogru_cevap:
-            # ✅ DOĞRU SESİ
+           
             sound_path = os.path.join(os.getcwd(), "correct_sound.wav")
             QSound.play(sound_path)
 
             QMessageBox.information(self, "Doğru", "Doğru cevap!", QMessageBox.Ok)
             self.main_app.dogrular.append(self.soru)
         else:
-            # ❌ YANLIŞ SESİ
+          
             sound_path = os.path.join(os.getcwd(), "incorret_sound.wav")
             QSound.play(sound_path)
 
@@ -84,9 +83,9 @@ class QuizDialog(QDialog):
         )
 
         if cevap == QMessageBox.Yes:
-            QApplication.quit()  # Uygulamayı tamamen kapatır
+            QApplication.quit()  
         else:
-            event.ignore()  # Pencereyi kapatma
+            event.ignore() 
 
 
 class MainApp(QWidget):
@@ -95,7 +94,7 @@ class MainApp(QWidget):
 
         self.init_ui()
         self.veri = None
-        self.dogrular = []  # Doğru bilinenler listesi
+        self.dogrular = [] 
         self.yanlislar = []
 
     def init_ui(self):
@@ -139,16 +138,16 @@ class MainApp(QWidget):
             cevap2 = row.iloc[2]
 
             if soru in self.yanlislar or soru in self.dogrular:
-                continue  # Eğer soru daha önce yanlış ya da doğru bilindi ise atla
+                continue  
 
-            # PyQt5 dialog penceresini oluştur
+        
             quiz_penceresi = QuizDialog(self, soru, cevap1, cevap2)
 
-            # Ana pencereyi gizle ve QuizDialog penceresini göster
+            
             self.hide()
             quiz_penceresi.exec_()
 
-        # Tüm sorular sorulduktan sonra yanlış bilinenleri tekrar sormak için tekrar çağır
+       
         if self.yanlislar:
             tekrar_sor = QMessageBox.question(
                 self,
@@ -157,7 +156,7 @@ class MainApp(QWidget):
                 QMessageBox.Yes | QMessageBox.No,
             )
             if tekrar_sor == QMessageBox.Yes:
-                self.yanlislar = []  # Yanlış bilinenleri sıfırla
+                self.yanlislar = [] 
                 self.soru_sorma()
             else:
                 QMessageBox.information(
